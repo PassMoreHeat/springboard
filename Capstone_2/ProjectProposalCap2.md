@@ -2,31 +2,33 @@
 __Springboard Capstone 2 Project Proposal__
 
 ### Introduction:
-The inland waterways of the United States are highways for domestic and foreign commerce. Commodities carried on barges and container ships move up and down US rivers and pass through locks owned and/or operated by the US Army Corps of Engineers (USACE). The Institute of Water Resources (IWR) within USACE collects data to document vessel transit through the 192 locks on 38 rivers and waterways. The Lock Performance Monitoring System (LPMS) developed and used by USACE holds both lockage information (including number of barges processed, direction of vessel traffic, and lock and chamber details) and event timing data (vessel arrival time, processing time and delay time). Some of this data is publicly available through the Freedom of Information Act through the [LPMS Public Web](http://corpslocks.usace.army.mil/lpwb/f?p=121:1:0:::::).
+The inland waterways of the United States are highways for domestic and foreign commerce. Commodities carried on barges and container ships move up and down US rivers and pass through locks owned and/or operated by the US Army Corps of Engineers (USACE). The Institute of Water Resources (IWR) within USACE collects data to document vessel transit through the 192 locks on 38 rivers and waterways. The Lock Performance Monitoring System (LPMS) developed and used by USACE holds both lockage information (including number of barges processed, direction of vessel traffic, and lock and chamber details) and event timing data (vessel arrival time, processing time and delay time). Some of these data are publicly available through the Freedom of Information Act through the [LPMS Public Web](http://corpslocks.usace.army.mil/lpwb/f?p=121:1:0:::::).
 
 Various factors may affect delay times for vessel passage through locks. One important variable could be the age and maintenance status of individual locks. Currently, Montgomery Point built in 2004 on the McClellan-Kerr Arkansas River system is the youngest USACE owned lock (FactCard2016). In the first 12 years of operation 20,137 vessels passed through the Montgomery Point lock. In contrast, the oldest locks owned and operated by the Corps are the Willamette Falls locks on the Willamette River constructed in 1873 (FactCard2016). Although time since lock construction may directly affect vessel delay time, regular maintenance of lock parts could complicate calculations of the actual age of a given lock. 
 
-Other factors influencing vessel delay time could include weather events, season, vessel traffic, or vessel features. The consequences of delays, or worse, failures of locks, are serious. Total waterborne commerce of the United States consists foreign and domestic commerce and totaled 2,292,042,500 short tons (2000 pounds) in 2016 (Waterborne Commerce National Summary, 2016). The highest volumes of national internal commodities (goods moving exclusively on waterways within the boundaries of the United States) transported on waterways in 2016 were petroleum, coal, crude materials, and food and farm goods. Projected economic impacts of single lock closures indicate steep decreases in aggregate economic activity and job losses depending on the specific lock, the length of closure and the main commodity type on affected waterways (Yu et al. 2016).
+Other factors influencing vessel delay time could include weather events, season, vessel traffic, or vessel features. The consequences of delays, or worse, failures of locks, are serious. The total waterborne commerce of the United States consists foreign and domestic commerce and totaled 2,292,042,500 short tons (2000 pounds) in 2016 (Waterborne Commerce National Summary, 2016). The highest volumes of national internal commodities (goods moving exclusively on waterways within the boundaries of the United States) transported on waterways in 2016 were petroleum, coal, crude materials, and food and farm goods. Projected economic impacts of single lock closures indicate steep decreases in aggregate economic activity and job losses depending on the specific lock, the length of closure and the main commodity type on affected waterways (Yu et al. 2016).
 
 ### Problem Statement:
-Vessel traffic on US waterways and through USACE-managed locks plays an important role in the transport of foreign and domestic goods into and out of the US. Locks are owned and operated by the US Army Corps of Engineers, range in age from 144 to 14 years since construction, and are considered by many to have surpassed their life-expectancy. Delays and failures of locks have immediate financial implications for shipping companies and for the USACE. Using a 17 year dataset of vessel traffic through 193 locks on 38 rivers I will explore patterns and use supervised learning and regression to determine conditions that lead to delays in lockage at individual locks. I am specifically interested in modeling delays and generally focused on identifying cost-based consequences to trends in lock operations.
+Vessel traffic on US waterways and through USACE-managed locks plays an important role in the transport of foreign and domestic goods into and out of the US. Locks are owned and operated by the US Army Corps of Engineers, range in age from 144 to 14 years since construction, and are considered by many to have surpassed their life-expectancy. Delays and failures of locks have immediate financial implications for shipping companies and for the USACE. Using a multi-year dataset of vessel traffic through 193 locks on 38 rivers I will explore patterns and use supervised learning and regression to determine conditions that lead to delays in lockage at individual locks. I am specifically interested in modeling delays and generally focused on identifying cost-based consequences to trends in lock operations. While I have access to 17 years of data I will likely initially explore a shorter time period (e.g., 5 years).
 
 ### Client profile:
 The Institute for Water Resources (IWR) headquartered in Alexandria, VA is a Field Operating Activity of the United States Army Corps of Engineers (USACE) responsible for water resources planning and water management programs. One focused center of IWR is the Navigation and Civil Works Decision Support Center (NDC) and its Waterborne Commerce Statistical Center (WCSC) in New Orleans, LA. These entities focus on data collection organization for waterborne commerce, vessel characteristics, port facilities, dredging information, and information on navigation locks.
 
-I am working directly with Steven Riley from the Navigation and Civil Works Decision Support Center. The NDC regularly analyzes commodity and transport data collected from lock operations. However, they have identified a need for a deeper analysis of the national network of waterway locks. Data exploration to find relationships relevant to budgeting, maintenance and scheduling would inform their planning for future operations. Specifically, NDC would like to know if increased lockage times indicate that a stoppage is imminent. Are their factors that could be used to predict delays and stoppages? 
+I am working directly with Steven Riley from the Navigation and Civil Works Decision Support Center. The NDC regularly analyzes commodity and transport data collected from lock operations. However, they have identified a need for a deeper analysis of the national network of waterway locks. Data exploration to find relationships relevant to budgeting, maintenance and scheduling would inform their planning for future operations. Specifically, NDC would like to know if increased lockage times indicate that a stoppage is imminent. Are there factors that could be used to predict delays and stoppages? 
+
+Because prior work focused on delays and failures of locks has not been performed on the national LPMS dataset I do not have _a priori_ hypotheses about the influential variables affecting vessel passage through locks. Instead, I expect that during the exploratory data analysis stage of my project I will develop a clearer view of patterns in the data. Thus, the exact nature of my machine learning approach will be determined during early stages of this Capstone project.
 
 ### Data Sources
-Data are tables from USACE Oracle Database with lock data from 2000 to 2017. Data with relevant identifiers and fields will include the following tables:
+Data are tables from USACE Oracle Database with lock data from 2000 to 2017. Data with relevant identifiers and fields include the following tables:
 
 * BARGES: BARGE-TYPE, BARGE-WIDTH, BARGE-LENGTH (all are VARCHAR2)
-BARGE-TRAFFIC: NUMBER-PROCESSED (number)
+* BARGE-TRAFFIC: NUMBER-PROCESSED (number)
 * FLOTILLAS: FLOT-LENGTH, FLOT-WIDTH, FLOT-DRAFT-FT, FLOT-DRAFT-IN, HAZARD-CODE (all are VARCHAR2)
 * VESSELS: VESSEL-TYPE (VARCHAR2)
 * TRAFFIC: SOL-DATE (start of lockage), ARRIVAL-DATE, END-OF-LOCKAGE, BOW-OVER-SILL, END-OF-ENTRY, START-OF-EXIT (all are date-time)
 * STALL-STOPPAGE: BEG-STOP-DATE, END-STOP-DATE (both date-time), SCHEDULED, REASON-CODE (both VARCHAR2).
 
-From these tables and fields I will construct Calculated Time Events with the same formulae used by NDC. Time events include: Approach Time, Chambering Time, Delay Time, Entry Time, Exit Time, Idle Time, and Processing Time.
+From these tables and fields, I will construct Calculated Time Events with the same formulae used by NDC. Time events include Approach Time, Chambering Time, Delay Time, Entry Time, Exit Time, Idle Time, and Processing Time. In addition, I have master tables with identifiers for regional districts, rivers, locks, and chambers.
 
 
 ### Capstone Project Outline:
@@ -35,8 +37,8 @@ From these tables and fields I will construct Calculated Time Events with the sa
    1. Connect tables
    2. Build formula to produce Calculated Time Events
    3. Clean data and check for missing values
-   4. Create a short document (1-2 pages) in your Github describing the data wrangling steps that you undertook to clean your capstone project data set. What kind of cleaning steps did you perform? How did you deal with missing values, if any? Were there outliers, and how did you decide to handle them? This document will eventually become part of your milestone report.
-2. Construct and develop data story for the lock delay data
+   4. Develop data wrangling report. I will create a short document (1-2 pages) in Github describing the data wrangling steps that I performed to clean my Lock Performance data set. Describe cleaning steps, process for dealing with missing values, and methods for identifying and addressing outliers.
+2. Construct and develop data story for the lock delay data.
 
    1. Count lockage events and other events related to lock usage
    2. Explore trends
@@ -46,19 +48,20 @@ From these tables and fields I will construct Calculated Time Events with the sa
    3. Produce histograms to visualize patterns in data
    4. Compare related quantities (seasonally, on different waterways, etc.)
    5. Produce scatterplots, violin plots and other graphs to visualize patterns in the data
-   6. Explore time-series.
+   6. Explore data with time-series analyses.
    		1. Are there patterns that indicate lock wear and tear?
    		2. Are there vessel traffic patterns?
    		3. Are there changes in lock usage over time?
    		4. Do Calculate Time Events increase or decrease over time?
-   	7. Having made these plots, what are some insights you get from them? Do you see any correlations? Is there a hypothesis you would like to investigate further? What other questions do they lead you to ask?
-3. Implement inferential statistical analyses. Write a short report (1-2 pages) on the inferential statistics steps you performed and your findings. Check this report into your Github and submit a link to it. Eventually, this report can be incorporated into your Milestone report.
+   	7. From graphs and visualizations identify insights, correlations, additional questions, and hypotheses to further investigate.
+3. Implement inferential statistical analyses. Write a short report on the inferential statistics steps I performed and my findings. 
 4. Submit Milestone Report.
 	1. Define the problem
 	2. Identify my client
 	3. Describe my data set, and how I cleaned/wrangled it
 	4. List other potential data sets I could use
 	5. Explain my initial findings
+	6. Address explicit questions for the next stages based on the patterns identified during EDA steps.
 5. Machine Learning with linear regression. Incorporate the following methods:
 
    1. Multiple linear regression to predict Delay Time for individual locks
