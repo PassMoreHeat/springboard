@@ -207,23 +207,23 @@ _Recursive Feature Elimination (RFE)._ I applied RFE from scikit-learn preproces
 
 | Full Data Models         | Description                     |
 | -----------------       |--------------------------------|
-| Graphics                | Folder of Images for Notebooks  | 
-| Capstone 1 Slide Deck.pdf  | Review prediction slides     |
-| Capstone Final Report Rating Predictor.ipynb | Final Project Report |
+| LogisticRegressionCV                | info  | 
+| Random Forest  | info     |
+| info | info|
 
 
 | Single Lock Models  | Description                     |
 | -----------------   |--------------------------------|
-| B2_GI-3  | Folder of Images for Notebooks  | 
-| B2-GI-4  | Review prediction slides     |
-| B2-GI-77 | Final Project Report |
-| B3-MI-27 | Documented wrangling steps      |
-| G3-WS-1	 | Report of Stats Analyses |
-| H2-OH-76 | Stats Analyses Code |
-| M3-GI-11 |  All ML Code for Rating Predictor |
-| M3-GI-12 | Report of Capstone Progress |
-| M3-GI-14 | Initial Proposal of Capstone    |
-| B2-FB-41 | Summary and Overview of Capstone|
+| B2_GI-3  | info  | 
+| B2-GI-4  | info     |
+| B2-GI-77 | info |
+| B3-MI-27 | info      |
+| G3-WS-1	 | info |
+| H2-OH-76 | info |
+| M3-GI-11 | info |
+| M3-GI-12 | info |
+| M3-GI-14 | info |
+| B2-FB-41 | info |
 |          |                                 |
 
 
