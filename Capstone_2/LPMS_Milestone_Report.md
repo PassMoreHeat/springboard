@@ -19,7 +19,7 @@ _By Heather A. Passmore, Ph.D._
 
 Cargo vessel traffic on United States waterways and through US Army Corps of Engineers-managed locks plays an important role in the transport of foreign and domestic goods into and out of the United States. Locks are owned and operated by the US Army Corps of Engineers (USACE), range in age from 144 to 14 years since construction, and are considered by many to have surpassed their life-expectancy. Delays and failures of locks have immediate financial implications for shipping companies and for the USACE. 
 
-My focus is to determine what factors predict delays for vessels as they approach locks and await lockage. The Lock Performance Management System (LPMS) logs 'delay-time' for individual vessels approaching a lock. Delay-time is the time elapsed from the  from the arrival of a vessel at a lock to the start of lockage. To achieve this I selected ten focal locks with high traffic and high proportions of vessels with longer delay-times. Using logistic regression and random forest models my goal is to classify the conditions associated with vessel delays and identify features useful for predicting delays. My supervised learning models are built from daily vessel traffic at 10 focal locks over a period of 5 recent years (one vessel per lock per day as available). 
+My focus is to determine what factors predict delays for vessels as they approach locks and await lockage. The Lock Performance Management System (LPMS) logs 'delay-time' for individual vessels approaching a lock. Delay-time is the time elapsed from the arrival of a vessel at a lock to the start of lockage. To achieve this I selected ten focal locks with high traffic and high proportions of vessels with longer delay-times. Using logistic regression and random forest models my goal is to classify the conditions associated with vessel delays and identify features useful for predicting delays. My supervised learning models are built from daily vessel traffic at 10 focal locks over a period of 5 recent years (one vessel per lock per day as available). 
 
 Because prior work focused on delays and failures of locks has not been performed on the national LPMS dataset I did not have _a priori_ hypotheses about the influential variables affecting vessel passage through locks. Instead, during the exploratory data analysis stage of my project I have developed clearer understanding of patterns in the data. My initial machine learning approach will focus on classifying whether a vessel is delayed (True/False) from variables related to vessel types, lock conditions, season, and weather conditions. 
 
@@ -70,7 +70,7 @@ The full traffic table with 17 years of vessel data at every lock is large so I 
 * Calculated ENTRY-TIME (Bow Over Sill to End Of Exit) in minutes.
 * Calculated EXIT-TIME (Start Of Exit to End Of Lockage) in minutes.
 * Calculated DELAY-TIME (Arrival Date to Start of Lockage) in minutes.
-* Created column 'E_R_L' as a unique identifier for lock (EROC + RIVER-CODE + LOCK-NO = E_R_L) and for merging data between tables
+* Created column 'E-R-L' as a unique identifier for lock (EROC + RIVER-CODE + LOCK-NO = E-R-L) and for merging data between tables
 * Created 'YYMMDD' from 'ARRIVAL-DATE' using .dt.date.
 * Created 'hhmmss' column from 'ARRIVAL-DATE' using .dt.time.
 
@@ -89,7 +89,7 @@ The purpose of the stall-stoppage data for this project was two-fold. First, I u
 * BEG-STOP-DATE converted to datetime64[ns] dtype and made index.
 * END-STOP-DATE made to datetime64[ns] dtype.
 * Calculated stop-minutes and stop-days from BEG-STOP-DATE and END-STOP-DATE
-* Created column 'E_R_L' as a unique identifier for lock (EROC + RIVER-CODE + LOCK-NO = E_R_L) and for merging data between tables.
+* Created column 'E-R-L' as a unique identifier for lock (EROC + RIVER-CODE + LOCK-NO = E-R-L) and for merging data between tables.
 * Created 'YYMMDD' from 'BEG-STOP-DATE' using .dt.date.
 
 The five-year dataframe of stall stoppage data has 288818 entries. In subsequent steps I divided the table into separate dataframes for scheduled and unscheduled stalls (SCHEDULED = True or False). Where there was a scheduled stall stoppage at a lock on a day I removed data for that lock/day from the Traffic dataframe so that scheduled stalls did not inflate the measure of delay  or influence model predictions of delay. Further, I used pivot_table on the dataframe of unscheduled stalls to produce a data frame with one record per lock per day with columns for each REASON-CODE and the mean of delay-time for that day/reason in each cell. This table, merged with the traffic table increases the type of information available for building the models.
@@ -129,9 +129,9 @@ __Define delay on a lock-by-lock basis__ My second attempt to define 'delay' for
 8. Start to build focal dataframe for machine learning (selected 10 high-traffic locks with high delay proportions)
 9. Delete unnecessary columns, create full and reduced datasets for ML
 
-![MapOf10Locks](Images/lock_10_map_colors.png)
+![MapOf10Locks](Images/lock_10_map.png)
 
-__Figure 2.__ Locations of 10 focal locks for the machine learning steps incorporating weather data. Lock locations are marked with red, blue and magenta triangles to make it easier to distinguish nearby locks. Focal locks are located in 5 states: Texas (3 locks), Indiana (1), Illinois (1), Louisiana (4), and Washington (1).
+__Figure 2.__ Locations of 10 focal locks for the machine learning steps incorporating weather data. Lock locations are marked with red circles. Focal locks are located in 5 states: Texas (3 nearby locks), Indiana (1), Illinois (1), Louisiana (4 locks — two pairs of nearby locks), and Washington (1).
 
 ## 4.0 Additional Data: NOAA Weather
 
@@ -147,7 +147,27 @@ My final dataframe for the machine learning stage of this project includes one v
 
 ## 5.0 Explanation of Initial Findings
 
-Results for EDA after Train/Test Split for machine learning modeling will go here. Coming soon.
+Through exploration of full 5-year vessel traffic data set I identified factors associated with differences between delayed and not-delayed vessels. Overall, the number of delayed vessels at USACE locks increased over the five-year study period (Figure 4). In addition, seasonal patterns of vessel delays indicate delay rates are reduced by half during winter months (Figure 5).
+
+![overall_yearly](Images/yearly.vessel.delay.overall.png)
+
+__Figure 4.__ _Yearly counts of delayed vessels across all USACE locks from 2013 through 2017. Frequency of extended delays increases over time. Delay is defined as the recorded delay-times greater than the 75th percentile of delay time at a given lock._
+
+![overall_monthly](Images/monthly.vessel.delay.overall.png)
+
+__Figure 5.__ _Monthly counts of delayed vessels across all USACE locks from 2013 through 2017. Delay frequency has a seasonal pattern with fewer delays, and perhaps less vessel traffic during the colder seasons. Delay is defined as the recorded delay-times greater than the 75th percentile of delay time at a given lock._
+
+Focal locks are located within 5 separate Districts and on 5 different rivers. During the period of study half of the focal locks have higher numbers of delay-days (days when there is at least one delayed vessel approaching the lock) than non-delay days (Figure 6). One factor that may affect vessel passage through locks is lockage-type. Lockage-type is the configuration of vessels as they transit a lock. Although this factor may be more likely to affect approach time and delay time for subsequent vessels than for the focal vessel (if different lockage-types have more complex procedures for entering and exiting locks) we find reason to include it in this study. In the focal lock dataset Open Passage (O) and Straight (S) lockages are the most common (Figure 7).
+
+![lock_count](Images/lock_delay_count.png)
+
+__Figure 6.__ _For 50% of focal locks there are more delay-days than non-delay-days over the period of study. Codes for lock identification, 'E-R-L', indicate the District, River, and Lock codes. Target binomial delay-cat, delay = 1, no-delay = 0._
+
+![lockage_type_count](Images/lockage_type_delay_count.png)
+
+__Figure 7.__ _Lockage-type, the configuration of vessels as they transit a lock, is more likely to affect approach time and delay time for subsequent vessels if passage is delayed during lockage. Here Open Passage (O) and Straight (S) lockages are the most common lockage types._
+
+Weather conditions may affect delay-times as vessels approach locks. Although this is not a factor that USACE can control, understanding the effects of weather types and extreme weather events could help USACE develop contingency plans for various seasons and specific weather conditions. In my final report I will explore relationships between weather and vessel delays. By fitting classification models I will determine whether there are lock, vessel, or weather related factors that are associated with delays at the ten focal locks.
 
 ## 6.0 Helpful Resources
 [FactCard](http://www.navigationdatacenter.us/factcard/FactCard2016.pdf), 2016. The US Waterway System 2016 Transportation Facts & Information. Navigation and Civil Works Decision Support Center, US Army Corps of Engineers. http://www.navigationdatacenter.us/factcard/FactCard2016.pdf
@@ -159,3 +179,4 @@ Results for EDA after Train/Test Split for machine learning modeling will go her
 Yu, T.E, B.C. English and R.J. Menard. 2016. Economic Impacts Analysis of Inland Waterway Disruption on the Transport of Corn and Soybeans. Staff Report #AE16-08. Department of Agricultural and Resource Economics, University of Tennessee.
 
 ***
+Copyright 2018 Heather A. Passmore
