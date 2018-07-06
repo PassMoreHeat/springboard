@@ -100,7 +100,7 @@ The river-master and lock-master tables allowed me to link more recognizable nam
 
 The lock-locations table includes latitude and longitude coordinates for each lock. With these I used matplotlib's basemap to plot maps of all lock locations (Figure 1) and for the 10 focal locks for the machine learning (Figure 2).
 
-![MapOfLocks](Images/LPMS_lock_map.png)
+![MapOf10Locks](Images/LPMS_lock_map.png)
 
 __Figure 1.__ Locations of 196 locks owned or managed by the US Army Corps of Engineers and monitored with the Lock Performance Monitoring System (LPMS). 
 
