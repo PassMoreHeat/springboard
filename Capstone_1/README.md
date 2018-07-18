@@ -21,4 +21,4 @@ My final classification model using LogisticRegression with cross-validation on 
 | Milestone Report for Rating Predictor.ipynb | Report of Capstone Progress |
 | ProjectProposal.md      | Initial Proposal of Capstone    |
 | README.md               | Summary and Overview of Capstone|
-|                         |                                 |
+| WordClouds Amazon Review.ipynb | Code for Word Cloud Graphics|
