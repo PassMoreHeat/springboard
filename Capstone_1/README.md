@@ -9,7 +9,7 @@ Both consumers and vendors depend on reviews and ratings to make informed decisi
 My final classification model using LogisticRegression with cross-validation on bag-of-words and bigrams classifies many Amazon reviews with 5-star ratings correctly as 'high' rated and many Amazon book reviews associated with lower ratings as 'low' rated. This accuracy of classification is a great step towards building tools for product review writing and rating. 
 
 ## Index of Repository
-| File Name               | Description                     |
+| File or Folder Name               | Description                     |
 | -----------------       |--------------------------------|
 | Graphics                | Folder of Images for Notebooks  | 
 | Capstone 1 Slide Deck.pdf  | Review prediction slides     |
