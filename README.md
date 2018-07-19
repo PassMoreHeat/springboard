@@ -1,24 +1,19 @@
 # Springboard Repository
-Projects for Data Science Career Track Workshop
+Repository of data science mini-projects and Capstones completed by Heather A. Passmore for Springboard's Data Science Career Track Workshop. Completed July 2018.
+
 # Description
-This repository contains exploratory data analyses, mini-project code, and drafts for collaborating with instructors and classmates for the Springboard Data Science Career Track curriculum.
+This repository contains exploratory data analyses, mini-project notebooks, take-home challenge work, and two complete Capstone projects for the Springboard Data Science Career Track curriculum. My Capstone projects address classification tasks using machine learning and natural language processing techniques. 
 
 ## Index of Repository
-| File Name                            | Description                     |
+| File Name                            | Folder or File Description                     |
 | ------------------------------       |:--------------------------------|
-| Capstone 1                           | folder for Capstone 1 files     |
-| linear regression                    | folder for linear regression mini project|
-| naive bayes                          | folder for naive bayes mini project    |
-| Body Temp inferential statisticsHAP.ipynb      | mini-project submission      |
-| DataStorytellingBookReviews      | Capstone 1 assignment|
-| GoogleBooksAPI ISBN.ipynb           | early Google API request code|
-| GoogleBooksAPI ISBN normalize.ipynb           | initial Google API request code|
-| Hospital Readmit inferential stats HAP.ipynb  | mini-project submission|
-| JSON Data Wrangling.WB.ipynb         | completed mini project    |
-| PyMongo Amazon Review.new.ipynb      | early Pymongo code      |
-| PyMongo Amazon Review.db.ipynb       | initial Pymongo code|
-|Racial Discrimination inferential stats HAP.ipynb| completed mini-project |
-|Springboard Body Temp inferential stats Passmore.ipynb | completed mini-project|
+| Capstone 1                           | Reviewer rating classification with NLP |
+| Capstone 2                           | Vessel Delay Classification for USACE Locks|
+| Take Home Challenges  | two sets of challenges completed for Springboard |
+| Clustering                           | Mini-Project work on clustering techniques  |
+| linear regression                    | linear regression mini project|
+| logistic regression                  | logistic regression mini project|
+| naive bayes                          | naive bayes mini project    |
+| Inferential Stats, Wrangling, EDA    | mini-projects and assignments |
 | README.md                            | description and index of repository|
-|Racial Discrimination inferential stats HAP.ipynb | completed mini-project|
-| Springboard Body Temp inferential stats Passmore.ipynb | completed mini-project|
+|||
