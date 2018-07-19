@@ -22,3 +22,4 @@ My final classification model using LogisticRegression with cross-validation on 
 | ProjectProposal.md      | Initial Proposal of Capstone    |
 | README.md               | Summary and Overview of Capstone|
 | WordClouds Amazon Review.ipynb | Code for Word Cloud Graphics|
+|||
